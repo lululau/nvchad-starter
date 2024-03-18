@@ -164,7 +164,7 @@ map("n", "<leader>fb", "<cmd> Telescope marks <CR>", { desc = "telescope bookmar
 map("n", "<D-i><D-b>", "<cmd> Telescope marks <CR>", { desc = "telescope bookmarks" , nowait = true, silent = true })
 map("n", "<leader>w|", "<C-o>:belowright vsplit | wincmd w<CR>", { desc = "Split window vertically", nowait = true, silent = true })
 map("n", "<leader>w-", "<C-o>:belowright split | wincmd w<CR>", { desc = "Split window horizontally", nowait = true, silent = true })
-map("n", "<leader>ji", "<cmd> Telescope ctags_outline outline<CR>", { desc = "Jump to ctags outline", nowait = true, silent = true })
+map("n", "<leader>ji", "<cmd> Telescope lsp_document_symbols<CR>", { desc = "Jump to ctags outline", nowait = true, silent = true })
 map("v", "<leader>*", "<cmd> Telescope grep_string <CR>", { desc = "Grep string" , nowait = true, silent = true })
 map("n", "<leader><leader>", "<cmd> HopChar2<CR>", { desc = "Jump to char", silent = true, nowait = true})
 map("n", "<leader>jl", "<cmd> HopLine<CR>", { desc = "Jump to char", silent = true, nowait = true})
