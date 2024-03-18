@@ -1,13 +1,36 @@
 ---@type ChadrcConfig
 local M = {}
 
-M.ui = {
-	theme = "onedark",
+-- Path to overriding theme and highlights files
+local highlights = require "highlights"
 
-	-- hl_override = {
-	-- 	Comment = { italic = true },
-	-- 	["@comment"] = { italic = true },
-	-- },
+M.ui = {
+  theme = "palenight",
+  theme_toggle = { "palenight", "one_light" },
+
+  hl_override = highlights.override,
+  hl_add = highlights.add,
+
+  tabufline = {
+    show_numbers = true,
+  },
+
+  nvdash = {
+    load_on_startup = true,
+    buttons = {
+      { "󰍉  Find File", "Spc f f", "Telescope find_files" },
+      { "󰈚  Recent Files", "Spc f r", "Telescope oldfiles" },
+      { "󰈭  Find Word", "Spc /", "Telescope live_grep" },
+      { "  Bookmarks", "Spc f b", "Telescope marks" },
+      { "  Themes", "Spc t h", "Telescope themes" },
+      { "  Mappings", "Spc h c", "NvCheatsheet" },
+    },
+  }
 }
+
+-- M.plugins = "plugins"
+
+-- check core.mappings for table structure
+-- M.mappings = require "mappings"
 
 return M
