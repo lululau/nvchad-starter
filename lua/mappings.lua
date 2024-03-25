@@ -186,3 +186,15 @@ map({"n", "v"}, "<leader>xa*", "<cmd> Tabularize /*<CR>", { desc = "Align by *",
 map({"n", "v"}, "<leader>xa/", "<cmd> Tabularize //\\zs<CR>", { desc = "Align by /", silent = true, nowait = true })
 map({"n", "v"}, "<leader>xa ", "<cmd> Tabularize /\\s\\ze\\S/l0<CR>", { desc = "Align by space", silent = true, nowait = true })
 map({"n", "v"}, "<leader>xa\\", "<cmd> Tabularize /\\\\<CR>", { desc = "Align by \\", silent = true, nowait = true })
+
+local diagnostics_active = true
+local toggle_diagnostics = function()
+  diagnostics_active = not diagnostics_active
+  if diagnostics_active then
+    vim.diagnostic.show()
+  else
+    vim.diagnostic.hide()
+  end
+end
+
+map('n', '<leader>ts', toggle_diagnostics, {desc = "Toggle Diagnostics", silent = true})
