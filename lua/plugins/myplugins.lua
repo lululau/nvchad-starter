@@ -304,6 +304,11 @@ local plugins = {
         telescope = true,
         diffview = true,
       },
+      mappings = {
+        popup = {
+          ["F"] = "PullPopup",
+        },
+      },
     },
     config = function(_, opts)
       require("neogit").setup(opts)
