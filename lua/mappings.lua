@@ -188,6 +188,7 @@ map({"n", "v"}, "<leader>xa*", "<cmd> Tabularize /*<CR>", { desc = "Align by *",
 map({"n", "v"}, "<leader>xa/", "<cmd> Tabularize //\\zs<CR>", { desc = "Align by /", silent = true, nowait = true })
 map({"n", "v"}, "<leader>xa ", "<cmd> Tabularize /\\s\\ze\\S/l0<CR>", { desc = "Align by space", silent = true, nowait = true })
 map({"n", "v"}, "<leader>xa\\", "<cmd> Tabularize /\\\\<CR>", { desc = "Align by \\", silent = true, nowait = true })
+map("n", "<cr>", "o<esc>", { desc = "Insert newline below", silent = true, nowait = false })
 
 local diagnostics_active = true
 local toggle_diagnostics = function()
