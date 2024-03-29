@@ -200,3 +200,13 @@ local toggle_diagnostics = function()
 end
 
 map('n', '<leader>ts', toggle_diagnostics, {desc = "Toggle Diagnostics", silent = true})
+map({"n", "x", "o"}, "]h", function()
+  local gs = require("gitsigns")
+  gs.next_hunk()
+end, { desc = "Next Hunk" })
+
+
+map({"n", "x", "o"}, "[h", function()
+  local gs = require("gitsigns")
+  gs.prev_hunk()
+end, { desc = "Prev Hunk" })
