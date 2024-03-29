@@ -7,7 +7,7 @@ local lspconfig = require "lspconfig"
 local servers = {
   "html", "cssls", "tsserver", "clangd", "lua_ls",
   "denols", "pyright", "solargraph", "rubocop",
-  "gopls", "rust_analyzer", "bashls"
+  "gopls", "rust_analyzer", "bashls",
 }
 
 for _, lsp in ipairs(servers) do
@@ -16,6 +16,12 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
+
+lspconfig.java_language_server.setup {
+  cmd = { "java-language-server" },
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
 
 -- 
 -- lspconfig.pyright.setup { blabla}

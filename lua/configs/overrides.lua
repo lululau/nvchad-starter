@@ -58,6 +58,8 @@ M.mason = {
     -- rust stuff
     "rust-analyzer",
 
+    "java_language_server",
+
     -- bash stuff
     "bash-language-server",
   },
