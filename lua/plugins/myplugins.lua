@@ -346,6 +346,11 @@ local plugins = {
   },
 
   {
+    "gennaro-tedesco/nvim-jqx",
+    ft = { "json", "yaml" },
+  },
+
+  {
     "nvim-telescope/telescope.nvim",
     opts = {
       defaults = {
