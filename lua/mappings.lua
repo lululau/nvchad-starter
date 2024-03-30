@@ -191,7 +191,15 @@ map({"n", "v"}, "<leader>xa*", "<cmd> Tabularize /*<CR>", { desc = "Align by *",
 map({"n", "v"}, "<leader>xa/", "<cmd> Tabularize //\\zs<CR>", { desc = "Align by /", silent = true, nowait = true })
 map({"n", "v"}, "<leader>xa ", "<cmd> Tabularize /\\s\\ze\\S/l0<CR>", { desc = "Align by space", silent = true, nowait = true })
 map({"n", "v"}, "<leader>xa\\", "<cmd> Tabularize /\\\\<CR>", { desc = "Align by \\", silent = true, nowait = true })
-map("n", "<cr>", "o<esc>", { desc = "Insert newline below", silent = true, nowait = false })
+vim.api.nvim_create_autocmd({"BufReadPost", "BufNewFile"}, {
+                              pattern = "*",
+                              callback = function()
+                                if not vim.bo.readonly and vim.bo.modifiable and vim.bo.buftype ~= 'quickfix' then
+                                  map("n", "<cr>", "o<esc>", { desc = "Insert newline below", silent = true, nowait = false, buffer = true })
+                                  vim.cmd.echom("'" .. vim.bo.buftype .. "'")
+                                end
+                              end,
+})
 map("n", "<M-x>", "<cmd>Telescope commands<cr>", { desc = "Show all commands", silent = true, nowait = false })
 map("n", "<leader>ss", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "search current buffer", silent = true, nowait = false })
 
