@@ -157,6 +157,7 @@ map("n", "<leader>fyn", function()
    vim.notify("Copied base name to clipboard: " .. path)
 end, { desc = "Copy base name to clipboard" })
 map("n", "<leader>gl", "<cmd> Telescope git_commits <CR>", { desc = "Git commits" , nowait = true, silent = true })
+map("n", "<leader>gc", "<cmd> Telescope git_branches <CR>", { desc = "Git branches" , nowait = true, silent = true })
 map("n", "<leader>gs", function() require("neogit").open({kind = "auto"}) end, { desc = "Git status" , nowait = true, silent = true })
 map("n", "<D-g>", function() require("neogit").open({kind = "auto"}) end, { desc = "Git status" , nowait = true, silent = true })
 map("n", "<leader>sl", "<cmd> Telescope resume <CR>", { desc = "Resume Telescope dialog" , nowait = true, silent = true })
@@ -191,6 +192,8 @@ map({"n", "v"}, "<leader>xa/", "<cmd> Tabularize //\\zs<CR>", { desc = "Align by
 map({"n", "v"}, "<leader>xa ", "<cmd> Tabularize /\\s\\ze\\S/l0<CR>", { desc = "Align by space", silent = true, nowait = true })
 map({"n", "v"}, "<leader>xa\\", "<cmd> Tabularize /\\\\<CR>", { desc = "Align by \\", silent = true, nowait = true })
 map("n", "<cr>", "o<esc>", { desc = "Insert newline below", silent = true, nowait = false })
+map("n", "<M-x>", "<cmd>Telescope commands<cr>", { desc = "Show all commands", silent = true, nowait = false })
+map("n", "<leader>ss", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "search current buffer", silent = true, nowait = false })
 
 local diagnostics_active = true
 local toggle_diagnostics = function()

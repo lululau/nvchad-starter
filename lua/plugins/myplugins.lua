@@ -336,6 +336,15 @@ local plugins = {
       })
     end,
   },
+
+  {
+    "f-person/git-blame.nvim",
+    cmd = "GitBlameToggle",
+    keys = {
+      {"<leader>gb", "<cmd>GitBlameToggle<cr>", desc = "Toggle Git Blame"},
+    }
+  },
+
   {
     "nvim-telescope/telescope.nvim",
     opts = {
