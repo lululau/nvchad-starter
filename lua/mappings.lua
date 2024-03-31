@@ -225,3 +225,5 @@ map({"n", "x", "o"}, "[h", function()
   local gs = require("gitsigns")
   gs.prev_hunk()
 end, { desc = "Prev Hunk" })
+
+map("n", "<D-r><D-u>", "<cmd>Lazy sync<CR>", { desc = "Update packages (Lazy sync)" })
