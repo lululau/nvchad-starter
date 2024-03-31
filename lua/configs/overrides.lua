@@ -18,6 +18,8 @@ M.treesitter = {
     "go",
     "rust",
     "bash",
+    "json",
+    "yaml",
     "vue"
   },
   indent = {
