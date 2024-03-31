@@ -348,6 +348,10 @@ local plugins = {
   {
     "gennaro-tedesco/nvim-jqx",
     ft = { "json", "yaml" },
+    keys = {
+      {"<leader>ajl", "<cmd>JqxList<cr>", desc = "List JSON elements"},
+      {"<leader>ajq", "<cmd>JqxQuery<cr>", desc = "Query JSON elements"},
+    }
   },
 
   {
