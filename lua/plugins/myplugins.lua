@@ -89,7 +89,12 @@ local plugins = {
   {
     "github/copilot.vim",
     cmd = "Copilot",
-    event = "InsertEnter"
+    event = "InsertEnter",
+    config = function()
+      vim.cmd [[
+         imap <script><silent><nowait><expr> <S-Tab> copilot#Accept()
+      ]]
+    end,
   },
 
   {
