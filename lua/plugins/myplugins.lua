@@ -403,6 +403,13 @@ local plugins = {
         submit = { "<C-Enter>", "<c-x><c-o><c-e>"}
       }
     }
+  },
+
+  {
+    "lululau/telescope-autojump.nvim",
+    keys = {
+      {"<leader>oj", "<cmd>Telescope autojump<cr>", desc = "Find autojump directories"},
+    },
   }
 
 }
