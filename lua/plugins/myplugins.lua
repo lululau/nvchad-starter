@@ -86,14 +86,54 @@ local plugins = {
   --   lazy = false,
   -- }
 
+  -- {
+  --   "github/copilot.vim",
+  --   cmd = "Copilot",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     vim.cmd [[
+  --        imap <script><silent><nowait><expr> <S-Tab> copilot#Accept()
+  --     ]]
+  --   end,
+  -- },
+
+
+
   {
-    "github/copilot.vim",
+    "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "InsertEnter",
     config = function()
-      vim.cmd [[
-         imap <script><silent><nowait><expr> <S-Tab> copilot#Accept()
-      ]]
+      require("copilot").setup({
+        panel = {
+          enabled = true,
+          auto_refresh = false,
+          keymap = {
+            jump_prev = "k",
+            jump_next = "j",
+            accept = "<CR>",
+            refresh = "gr",
+            open = "<M-S-CR>"
+          },
+          layout = {
+            position = "bottom", -- | top | left | right
+            ratio = 0.4
+          },
+        },
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+          debounce = 75,
+          keymap = {
+            accept = "<S-Tab>",
+            accept_word = "<M-f>",
+            accept_line = "<M-n>",
+            next = "<M-\\>",
+            prev = "<M-[>",
+            dismiss = "<C-g>",
+          },
+        },
+      })
     end,
   },
 
