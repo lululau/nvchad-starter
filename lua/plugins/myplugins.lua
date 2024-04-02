@@ -146,29 +146,8 @@ local plugins = {
         ignore_lsp = { "efm", "null-ls" },
         silent_chdir = false,
       }
-      local history = require("project_nvim.utils.history")
-      history.write_projects_to_history = function()
-        local mode = "w"
-        if M.recent_projects == nil then
-          mode = "a"
-        end
-        local file = open_history(mode)
-
-        if file ~= nil then
-          local res = sanitize_projects()
-
-          local tbl_out = res
-          -- Transform table to string
-          local out = ""
-          for _, v in ipairs(tbl_out) do
-            out = out .. v .. "\n"
-          end
-
-          -- Write string out to file and close
-          uv.fs_write(file, out, -1)
-          uv.fs_close(file)
-        end
-      end
+      local M = require("project_nvim.utils.history")
+      return require("configs.project_overrides").override(M)
     end
   },
 
@@ -584,7 +563,7 @@ local plugins = {
         json_db_path = vim.fs.normalize(vim.fn.stdpath("data") .. "/bookmarks.db.json"),
       })
     end
-  }
+  },
 
 
 }
