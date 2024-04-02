@@ -568,6 +568,25 @@ local plugins = {
     end
   },
 
+  {
+    "LintaoAmons/bookmarks.nvim",
+    dependencies = {
+      {"stevearc/dressing.nvim"} -- optional: to have the same UI shown in the GIF
+    },
+    keys = {
+      {"<leader>mm", "<cmd>BookmarksMark<cr>", desc = "Make bookmark"},
+      {"<leader>ml", "<cmd>BookmarksGoto<cr>", desc = "List bookmarks"},
+      {"<leader>fb", "<cmd>BookmarksGoto<cr>", desc = "List bookmarks"},
+      {"<D-i><D-b>", "<cmd>BookmarksGoto<cr>", desc = "List bookmarks"},
+    },
+    config = function ()
+      require("bookmarks").setup( {
+        json_db_path = vim.fs.normalize(vim.fn.stdpath("data") .. "/bookmarks.db.json"),
+      })
+    end
+  }
+
+
 }
 
 return plugins
