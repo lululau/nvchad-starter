@@ -538,7 +538,6 @@ local plugins = {
     end,
   },
 
-
   {
     "cuducos/yaml.nvim",
     ft = { "yaml" }, -- optional
@@ -549,7 +548,26 @@ local plugins = {
     keys = {
       {"<leader>ay", "<cmd>YAMLTelescope<cr>", desc = "List YAML elements"},
     }
-  }
+  },
+
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function() vim.fn["mkdp#util#install"]() end,
+    keys = {
+      {",cp", "<cmd>MarkdownPreview<cr>", desc = "Markdown Preview"},
+    }
+  },
+
+  {
+    'yaocccc/nvim-hl-mdcodeblock.lua',
+    after = 'nvim-treesitter',
+    config = function ()
+      require('hl-mdcodeblock').setup({})
+    end
+  },
+
 }
 
 return plugins
