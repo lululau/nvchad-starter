@@ -176,6 +176,9 @@ map("n", "<leader>jl", "<cmd> HopLine<CR>", { desc = "Jump to char", silent = tr
 map("n", "<D-l>", "<cmd> HopLine<CR>", { desc = "Jump to char", silent = true, nowait = true})
 map("n", "<C-x>@sl", "<cmd> HopLine<CR>", { desc = "Jump to char", silent = true, nowait = true})
 map("n", "<leader>x", "")
+
+map("n", "<leader>fo", function() vim.fn.jobstart("open " .. vim.fn.expand "%:p", {detach = true}) end, { desc = "Open file with system default application" })
+
 map({"n", "v"}, "<leader>xa#", "<cmd> Tabularize /#<CR>", { desc = "Align by #", silent = true, nowait = true })
 map({"n", "v"}, "<leader>xa:", "<cmd> Tabularize /:<CR>", { desc = "Align by :", silent = true, nowait = true })
 map({"n", "v"}, "<leader>xa=", "<cmd> Tabularize /=<CR>", { desc = "Align by =", silent = true, nowait = true })
