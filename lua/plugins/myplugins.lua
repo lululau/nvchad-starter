@@ -537,6 +537,19 @@ local plugins = {
       require("gitsigns").setup(opts)
     end,
   },
+
+
+  {
+    "cuducos/yaml.nvim",
+    ft = { "yaml" }, -- optional
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim", -- optional
+    },
+    keys = {
+      {"<leader>ay", "<cmd>YAMLTelescope<cr>", desc = "List YAML elements"},
+    }
+  }
 }
 
 return plugins
