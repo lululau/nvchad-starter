@@ -106,6 +106,29 @@ local plugins = {
         ignore_lsp = { "efm", "null-ls" },
         silent_chdir = false,
       }
+      local history = require("project_nvim.utils.history")
+      history.write_projects_to_history = function()
+        local mode = "w"
+        if M.recent_projects == nil then
+          mode = "a"
+        end
+        local file = open_history(mode)
+
+        if file ~= nil then
+          local res = sanitize_projects()
+
+          local tbl_out = res
+          -- Transform table to string
+          local out = ""
+          for _, v in ipairs(tbl_out) do
+            out = out .. v .. "\n"
+          end
+
+          -- Write string out to file and close
+          uv.fs_write(file, out, -1)
+          uv.fs_close(file)
+        end
+      end
     end
   },
 
@@ -279,7 +302,24 @@ local plugins = {
   {
     "hrsh7th/nvim-cmp",
     opts = function()
-      return require("nvchad.configs.cmp")
+      local cmp = require "cmp"
+      local options = require("nvchad.configs.cmp")
+      options.mapping["<S-Tab>"] = nil
+
+      options.mapping["<Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.confirm {
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+          }
+        elseif require("luasnip").expand_or_jumpable() then
+          vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
+        else
+          fallback()
+        end
+      end, { "i", "s" })
+
+      return options
     end,
   },
 
@@ -363,6 +403,7 @@ local plugins = {
     "nvim-telescope/telescope.nvim",
     opts = {
       defaults = {
+        prompt_prefix = " 󰍉  ",
         mappings = {
           n = {
             ["<C-f>"] = 'results_scrolling_down',
@@ -415,8 +456,47 @@ local plugins = {
     keys = {
       {"<leader>oj", "<cmd>Telescope autojump<cr>", desc = "Find autojump directories"},
     },
-  }
+  },
 
+
+  {
+    "lewis6991/gitsigns.nvim",
+    event = "User FilePost",
+    opts = function()
+      return{
+        signs = {
+          add = { text = "│" },
+          change = { text = "│" },
+          delete = { text = "󰍵" },
+          topdelete = { text = "‾" },
+          changedelete = { text = "~" },
+          untracked = { text = "│" },
+        },
+
+        on_attach = function(bufnr)
+          local gs = package.loaded.gitsigns
+
+          local function opts(desc)
+            return { buffer = bufnr, desc = desc }
+          end
+
+          local map = vim.keymap.set
+
+          map("n", "<leader>rh", gs.reset_hunk, opts "Reset Hunk")
+          map("n", "<leader>ph", gs.preview_hunk, opts "Preview Hunk")
+          map("n", "<leader>gb", gs.blame_line, opts "Blame Line")
+
+          map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+          map({'o', 'x'}, 'ah', ':<C-U>Gitsigns select_hunk<CR>')
+
+        end,
+      } 
+    end,
+    config = function(_, opts)
+      dofile(vim.g.base46_cache .. "git")
+      require("gitsigns").setup(opts)
+    end,
+  },
 }
 
 return plugins
