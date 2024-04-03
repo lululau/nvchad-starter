@@ -184,8 +184,14 @@ local plugins = {
       { "<C-x><C-o><C-b>", function()
         require("nvterm.terminal").self_send("cd " .. vim.g.last_file_directory .. "\n")
       end, mode = "t"},
-      {"<D-w>", function() require("nvterm.terminal").toggle("horizontal") end, mode = "t"},
-      {"<C-x>@sw", function() require("nvterm.terminal").toggle("horizontal") end, mode = "t"},
+      {"<D-w>", function() 
+        local win = vim.api.nvim_get_current_win()
+        vim.api.nvim_win_close(win, true)
+      end, mode = "t"},
+      {"<C-x>@sw", function() 
+        local win = vim.api.nvim_get_current_win()
+        vim.api.nvim_win_close(win, true)
+      end, mode = "t"},
     }
   },
 
@@ -484,6 +490,7 @@ local plugins = {
             ruby = { command = {"pry"} },
             javascript = { command = {"node"} },
             lua = { command = {"lua"} },
+            java = { command = {"jshell"} },
           },
           -- How the repl window will be displayed
           -- See below for more information
@@ -492,7 +499,7 @@ local plugins = {
         -- Iron doesn't set keymaps by default anymore.
         -- You can set them here or manually add keymaps to the functions in iron.core
         keymaps = {
-          send_motion = ",sc",
+          send_motion = ",ss",
           visual_send = ",sc",
           send_file = ",sb",
           send_line = ",sl",
@@ -518,10 +525,11 @@ local plugins = {
       vim.keymap.set('n', ',rs', '<cmd>IronRepl<cr>')
       vim.keymap.set('n', ',rr', '<cmd>IronRestart<cr>')
       vim.keymap.set('n', ',rf', '<cmd>IronFocus<cr>')
+      vim.keymap.set('n', ",'", '<cmd>IronFocus<cr>')
       vim.keymap.set('n', ',rh', '<cmd>IronHide<cr>')
     end,
     keys = {
-      {",sc", mode = "n", desc = "Send Motion"},
+      {",ss", mode = "n", desc = "Send Motion"},
       {",sc", mode = "v", desc = "Send Visual"},
       {",sb", mode = "n", desc = "Send File"},
       {",sl", mode = "n", desc = "Send Line"},
@@ -537,7 +545,16 @@ local plugins = {
       {",rs", mode = "n", desc = "Open REPL"},
       {",rr", mode = "n", desc = "Restart REPL"},
       {",rf", mode = "n", desc = "Focus REPL"},
+      {",'", mode = "n", desc = "Focus REPL"},
       {",rh", mode = "n", desc = "Hide REPL"},
+      {"<D-w>", function() 
+        local win = vim.api.nvim_get_current_win()
+        vim.api.nvim_win_close(win, true)
+      end, mode = "t"},
+      {"<C-x>@sw", function() 
+        local win = vim.api.nvim_get_current_win()
+        vim.api.nvim_win_close(win, true)
+      end, mode = "t"},
     }
 
   },
