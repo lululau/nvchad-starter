@@ -7,7 +7,7 @@ local lspconfig = require "lspconfig"
 local servers = {
   "html", "cssls", "tsserver", "clangd", "lua_ls",
   "denols", "pyright", "solargraph", "rubocop",
-  "gopls", "rust_analyzer", "bashls",
+  "gopls", "rust_analyzer", "bashls", "marksman"
 }
 
 for _, lsp in ipairs(servers) do

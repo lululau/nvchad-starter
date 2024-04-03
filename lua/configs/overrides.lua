@@ -64,6 +64,8 @@ M.mason = {
 
     -- bash stuff
     "bash-language-server",
+
+    "mrksman",
   },
 }
 
