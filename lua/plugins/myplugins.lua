@@ -336,6 +336,9 @@ local plugins = {
 
       return options
     end,
+    keys = {
+      {"<M-/>", function() require("cmp").complete() end, mode = "i" }
+    },
   },
 
   {
