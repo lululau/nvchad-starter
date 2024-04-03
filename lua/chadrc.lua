@@ -28,6 +28,23 @@ M.ui = {
   }
 }
 
+-- autogroups
+local chadrc_group = vim.api.nvim_create_augroup("Chadrc", { clear = true })
+vim.api.nvim_create_autocmd("BufLeave", {
+  group = chadrc_group,
+  pattern = "*",
+  callback = function()
+    -- if file buffer
+    if vim.bo.buftype == "" then
+      vim.g.last_file_directory = vim.fn.expand "%:p:h"
+    end
+    if vim.bo.buftype ~= "terminal" then
+      vim.g.last_project_directory = vim.fn.getcwd()
+    end
+  end,
+})
+
+
 -- M.plugins = "plugins"
 
 -- check core.mappings for table structure

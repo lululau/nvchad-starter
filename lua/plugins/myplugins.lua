@@ -138,11 +138,15 @@ local plugins = {
   },
 
   {
-    "NvChad/nvterm",
+    "lululau/nvterm",
     config = function ()
+      local shell = "/bin/zsh"
+      if vim.fn.has("mac") == 1 and vim.fn.expand("$USER") == "liuxiang" then
+        vim.env.ZDOTDIR = vim.fn.expand("$HOME") .. "/.config/light-zsh.d"
+      end
       require("nvterm").setup({
           terminals = {
-            shell = "/bin/bash",
+            shell = shell,
             type_opts = {
               float = {
                 relative = 'editor',
@@ -166,6 +170,15 @@ local plugins = {
           },
       })
     end,
+
+    keys = {
+      {"<D-CR>", function()
+        require("nvterm.terminal").self_send("cd " .. vim.g.last_project_directory .. "\n")
+      end, mode = "t" },
+      {"<S-CR>", function()
+        require("nvterm.terminal").self_send("cd " .. vim.g.last_file_directory .. "\n")
+      end, mode = "t"},
+    }
   },
 
   {
