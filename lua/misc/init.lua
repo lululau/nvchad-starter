@@ -1,6 +1,10 @@
 for i = 1, 9, 1 do
-  vim.api.nvim_set_keymap("", string.format("<A-%s>", i), ":lua vim.api.nvim_set_current_buf(vim.t.bufs["..i.."])<CR>", { noremap = true, silent = true })
-  vim.api.nvim_set_keymap("", string.format("<D-%s>", i), ":lua vim.api.nvim_set_current_buf(vim.t.bufs["..i.."])<CR>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap("n", string.format("<A-%s>", i), ":lua vim.api.nvim_set_current_buf(vim.t.bufs["..i.."])<CR>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap("n", string.format("<D-%s>", i), ":lua vim.api.nvim_set_current_buf(vim.t.bufs["..i.."])<CR>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap("i", string.format("<A-%s>", i), "<C-o>:lua vim.api.nvim_set_current_buf(vim.t.bufs["..i.."])<CR>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap("i", string.format("<D-%s>", i), "<C-o>:lua vim.api.nvim_set_current_buf(vim.t.bufs["..i.."])<CR>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap("v", string.format("<A-%s>", i), "<esc>:lua vim.api.nvim_set_current_buf(vim.t.bufs["..i.."])<CR>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap("v", string.format("<D-%s>", i), "<esc>:lua vim.api.nvim_set_current_buf(vim.t.bufs["..i.."])<CR>", { noremap = true, silent = true })
 end
 
 vim.api.nvim_set_keymap("", "<M-Return>", ":Copilot panel<CR>", { noremap = true, silent = true })

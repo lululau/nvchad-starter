@@ -305,6 +305,14 @@ local plugins = {
     opts = function()
       local cmp = require "cmp"
       local options = require("nvchad.configs.cmp")
+      options.sources = {
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+        { name = "buffer" },
+        { name = "nvim_lua" },
+        { name = "path" },
+        { name = "crates" },
+      }
       options.mapping["<S-Tab>"] = nil
 
       options.mapping["<Tab>"] = cmp.mapping(function(fallback)
@@ -390,6 +398,150 @@ local plugins = {
       {"<leader>gb", "<cmd>GitBlameToggle<cr>", desc = "Toggle Git Blame"},
     }
   },
+
+  {
+    "niuiic/git-log.nvim",
+    keys = {
+      {"<leader>gl", function() require("git-log").check_log() end, desc = "Show Git Log", mode = {"n"}},
+      {"gl", function() require("git-log").check_log() end, desc = "Show Git Log", mode = {"x"}},
+    },
+    dependencies = {
+      "niuiic/core.nvim",
+    },
+  },
+
+
+  -- {
+  --   "aaronhallaert/advanced-git-search.nvim",
+  --   keys = {
+  --     { "<leader>g/", "<cmd>AdvancedGitSearch<cr>", desc = "Advanced Git Search" }
+  --   },
+  --   config = function()
+  --     -- optional: setup telescope before loading the extension
+  --     require("telescope").setup{
+  --       -- move this to the place where you call the telescope setup function
+  --       extensions = {
+  --         advanced_git_search = {
+  --           -- fugitive or diffview
+  --           diff_plugin = "diffview",
+  --           -- customize git in previewer
+  --           -- e.g. flags such as { "--no-pager" }, or { "-c", "delta.side-by-side=false" }
+  --           git_flags = {},
+  --           -- customize git diff in previewer
+  --           -- e.g. flags such as { "--raw" }
+  --           git_diff_flags = {},
+  --           -- Show builtin git pickers when executing "show_custom_functions" or :AdvancedGitSearch
+  --           show_builtin_git_pickers = false,
+  --           entry_default_author_or_date = "author", -- one of "author" or "date"
+  --           keymaps = {
+  --             -- following keymaps can be overridden
+  --             toggle_date_author = "<C-w>",
+  --             open_commit_in_browser = "<C-o>",
+  --             copy_commit_hash = "<C-y>",
+  --           }
+  --         }
+  --       }
+  --     }
+  --
+  --     require("telescope").load_extension("advanced_git_search")
+  --   end,
+  --   dependencies = {
+  --     --- See dependencies
+  --     "nvim-telescope/telescope.nvim",
+  --     -- to show diff splits and open commits in browser
+  --     "tpope/vim-fugitive",
+  --     -- to open commits in browser with fugitive
+  --     "tpope/vim-rhubarb",
+  --     -- optional: to replace the diff from fugitive with diffview.nvim
+  --     -- (fugitive is still needed to open in browser)
+  --     "sindrets/diffview.nvim",
+  --   }, 
+  -- },
+
+
+
+  {
+    'saecki/crates.nvim',
+    event = { "BufRead Cargo.toml" },
+    config = function()
+      require('crates').setup()
+    end,
+  },
+
+  {
+    'Vigemus/iron.nvim',
+    config = function ()
+      local iron = require("iron.core")
+
+      iron.setup {
+        config = {
+          -- Whether a repl should be discarded or not
+          scratch_repl = true,
+          -- Your repl definitions come here
+          repl_definition = {
+            sh = { command = {"zsh"} },
+            python = { command = {"ipython"} },
+            ruby = { command = {"pry"} },
+            javascript = { command = {"node"} },
+            lua = { command = {"lua"} },
+          },
+          -- How the repl window will be displayed
+          -- See below for more information
+          repl_open_cmd = require('iron.view').right("40%"),
+        },
+        -- Iron doesn't set keymaps by default anymore.
+        -- You can set them here or manually add keymaps to the functions in iron.core
+        keymaps = {
+          send_motion = ",sc",
+          visual_send = ",sc",
+          send_file = ",sb",
+          send_line = ",sl",
+          send_until_cursor = ",su",
+          send_mark = ",sm",
+          mark_motion = ",mc",
+          mark_visual = ",mc",
+          remove_mark = ",md",
+          cr = ",s<cr>",
+          interrupt = ",s,",
+          exit = ",sq",
+          clear = ",cl",
+        },
+        -- If the highlight is on, you can change how it looks
+        -- For the available options, check nvim_set_hl
+        highlight = {
+          italic = true
+        },
+        ignore_blank_lines = true, -- ignore blank lines when sending visual select lines
+      }
+
+      -- iron also has a list of commands, see :h iron-commands for all available commands
+      vim.keymap.set('n', ',rs', '<cmd>IronRepl<cr>')
+      vim.keymap.set('n', ',rr', '<cmd>IronRestart<cr>')
+      vim.keymap.set('n', ',rf', '<cmd>IronFocus<cr>')
+      vim.keymap.set('n', ',rh', '<cmd>IronHide<cr>')
+    end,
+    keys = {
+      {",sc", mode = "n", desc = "Send Motion"},
+      {",sc", mode = "v", desc = "Send Visual"},
+      {",sb", mode = "n", desc = "Send File"},
+      {",sl", mode = "n", desc = "Send Line"},
+      {",su", mode = "n", desc = "Send Until Cursor"},
+      {",sm", mode = "n", desc = "Send Mark"},
+      {",mc", mode = "n", desc = "Mark Motion"},
+      {",mc", mode = "v", desc = "Mark Visual"},
+      {",md", mode = "n", desc = "Remove Mark"},
+      {",s<cr>", mode = "n", desc = "Send Current Line"},
+      {",s,", mode = "n", desc = "Interrupt"},
+      {",sq", mode = "n", desc = "Exit"},
+      {",cl", mode = "n", desc = "Clear"},
+      {",rs", mode = "n", desc = "Open REPL"},
+      {",rr", mode = "n", desc = "Restart REPL"},
+      {",rf", mode = "n", desc = "Focus REPL"},
+      {",rh", mode = "n", desc = "Hide REPL"},
+    }
+
+  },
+
 
   {
     "gennaro-tedesco/nvim-jqx",
@@ -573,6 +725,38 @@ local plugins = {
     end
   },
 
+  { 
+    "folke/neodev.nvim",
+    event = "BufEnter *.lua"
+  },
+
+
+  {
+    'gelguy/wilder.nvim',
+    event = "CmdlineEnter",
+    config = function()
+      local wilder = require('wilder')
+      wilder.setup {
+        modes = {':', '/', '?'},
+        next_key = '<Tab>',
+        previous_key = '<S-Tab>',
+        accept_key = '<Down>',
+        reject_key = '<Up>',
+      }
+
+      wilder.set_option('renderer', wilder.popupmenu_renderer(
+        wilder.popupmenu_border_theme({
+          highlights = {
+            border = 'Normal', -- highlight to use for the border
+          },
+          -- 'single', 'double', 'rounded' or 'solid'
+          -- can also be a list of 8 characters, see :h wilder#popupmenu_border_theme() for more details
+          border = 'rounded',
+        })
+      ))
+
+    end,
+  }
 
 }
 
@@ -588,8 +772,8 @@ if vim.fn.has("mac") == 1 then
           auto_refresh = false,
           keymap = { jump_prev = "k", jump_next = "j", accept = "<CR>", refresh = "gr", open = "<M-S-CR>" },
           layout = {
-            position = "bottom", -- | top | left | right
-            ratio = 0.4
+            position = "right", -- | top | left | right
+            ratio = 0.3
           },
         },
         suggestion = {
