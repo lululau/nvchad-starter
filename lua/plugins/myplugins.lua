@@ -500,6 +500,32 @@ local plugins = {
   },
 
   {
+    "numToStr/Comment.nvim",
+    keys = {
+      { "gcc", mode = "n", desc = "Comment toggle current line" },
+      { "<D-/>", function()
+        local api = require("Comment.api")
+        api.toggle.linewise.current()
+        vim.api.nvim_feedkeys("j", "n", false)
+      end, mode = {"n", "i"}, desc = "Comment toggle current line" },
+      { "gc", mode = { "n", "o" }, desc = "Comment toggle linewise" },
+      { "gc", mode = "x", desc = "Comment toggle linewise (visual)" },
+      { "<D-/>", function() 
+        local api = require("Comment.api")
+        local esc = vim.api.nvim_replace_termcodes("<esc>", true, false, true)
+        vim.api.nvim_feedkeys(esc, "nx", false)
+        api.toggle.linewise(vim.fn.visualmode())
+      end, mode = "x", desc = "Comment toggle linewise (visual)" },
+      { "gbc", mode = "n", desc = "Comment toggle current block" },
+      { "gb", mode = { "n", "o" }, desc = "Comment toggle blockwise" },
+      { "gb", mode = "x", desc = "Comment toggle blockwise (visual)" },
+    },
+    config = function(_, opts)
+      require("Comment").setup(opts)
+    end,
+  },
+
+  {
     "cuducos/yaml.nvim",
     ft = { "yaml" }, -- optional
     dependencies = {
