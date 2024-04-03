@@ -172,12 +172,20 @@ local plugins = {
     end,
 
     keys = {
-      {"<D-CR>", function()
+      { "<D-CR>", function()
         require("nvterm.terminal").self_send("cd " .. vim.g.last_project_directory .. "\n")
       end, mode = "t" },
-      {"<S-CR>", function()
+      { "<C-x><C-o><C-a>", function()
+        require("nvterm.terminal").self_send("cd " .. vim.g.last_project_directory .. "\n")
+      end, mode = "t" },
+      { "<S-CR>", function()
         require("nvterm.terminal").self_send("cd " .. vim.g.last_file_directory .. "\n")
       end, mode = "t"},
+      { "<C-x><C-o><C-b>", function()
+        require("nvterm.terminal").self_send("cd " .. vim.g.last_file_directory .. "\n")
+      end, mode = "t"},
+      {"<D-w>", function() require("nvterm.terminal").toggle("horizontal") end, mode = "t"},
+      {"<C-x>@sw", function() require("nvterm.terminal").toggle("horizontal") end, mode = "t"},
     }
   },
 
