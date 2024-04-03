@@ -98,45 +98,6 @@ local plugins = {
   -- },
 
 
-
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      require("copilot").setup({
-        panel = {
-          enabled = true,
-          auto_refresh = false,
-          keymap = {
-            jump_prev = "k",
-            jump_next = "j",
-            accept = "<CR>",
-            refresh = "gr",
-            open = "<M-S-CR>"
-          },
-          layout = {
-            position = "bottom", -- | top | left | right
-            ratio = 0.4
-          },
-        },
-        suggestion = {
-          enabled = true,
-          auto_trigger = true,
-          debounce = 75,
-          keymap = {
-            accept = "<S-Tab>",
-            accept_word = "<M-f>",
-            accept_line = "<M-n>",
-            next = "<M-\\>",
-            prev = "<M-[>",
-            dismiss = "<C-g>",
-          },
-        },
-      })
-    end,
-  },
-
   {
     'ahmedkhalf/project.nvim',
     lazy = false,
@@ -567,5 +528,54 @@ local plugins = {
 
 
 }
+
+if vim.fn.has("mac") == 1 then
+  table.insert(plugins, {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        panel = {
+          enabled = true,
+          auto_refresh = false,
+          keymap = { jump_prev = "k", jump_next = "j", accept = "<CR>", refresh = "gr", open = "<M-S-CR>" },
+          layout = {
+            position = "bottom", -- | top | left | right
+            ratio = 0.4
+          },
+        },
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+          debounce = 75,
+          keymap = {
+            accept = "<S-Tab>", accept_word = "<M-f>", accept_line = "<M-n>", next = "<M-\\>", prev = "<M-[>", dismiss = "<C-g>",
+          },
+        },
+      })
+    end,
+  })
+else
+  table.insert(plugins, {
+    'Exafunction/codeium.vim',
+    config = function ()
+      vim.g.codeium_enabled = true
+      vim.g.codeium_filetypes_disabled_by_default = false
+      vim.cmd('highlight CodeiumSuggestion guifg=#24ead9 ctermfg=6')
+      vim.keymap.set('i', '<S-Tab>', function () return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
+      vim.keymap.set('i', '<M-]>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
+      vim.keymap.set('i', '<M-[>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
+      vim.keymap.set('i', '<c-g>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
+    end,
+    keys = {
+      {"<M-\\>", function ()
+        vim.cmd.CodeiumEnable()
+        vim.fn['codeium#Complete']()
+      end, silent = true, desc = "Trigger Codium Complete", mode = "i"},
+    }
+  })
+end
+
 
 return plugins
