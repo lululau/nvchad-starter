@@ -52,7 +52,7 @@
   "tabular": { "branch": "master", "commit": "339091ac4dd1f17e225fe7d57b48aff55f99b23a" },
   "telescope-autojump.nvim": { "branch": "master", "commit": "7f9ca35e715a03e905f1f97d02d558a88b849a99" },
   "telescope-ctags-outline.nvim": { "branch": "master", "commit": "d128c817589274c760c27c97500d392929f3c1dd" },
-  "telescope.nvim": { "branch": "master", "commit": "4626aaa2bcfdacf55fd6d44b430e2df81b2403ff" },
+  "telescope.nvim": { "branch": "master", "commit": "1bb28df3cfc241b961331f00dcb8d5b45fe3e4f0" },
   "ui": { "branch": "v2.5", "commit": "af9ab0cd9e193c68c443939fa7e4b8213db5693b" },
   "vim-textobj-line": { "branch": "master", "commit": "1a6780d29adcf7e464e8ddbcd0be0a9df1a37339" },
   "vim-textobj-parameter": { "branch": "master", "commit": "201144f19a1a7081033b3cf2b088916dd0bcb98c" },

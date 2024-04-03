@@ -2,6 +2,7 @@ local M = {}
 
 M.treesitter = {
   ensure_installed = {
+    "vimdoc",
     "vim",
     "lua",
     "html",
@@ -32,40 +33,39 @@ M.treesitter = {
 
 M.mason = {
   ensure_installed = {
-    -- lua stuff
-    "lua-language-server",
-    "stylua",
-
-    -- web dev stuff
-    "css-lsp",
-    "html-lsp",
-    "typescript-language-server",
-    "deno",
-    "prettier",
-
-    -- c/cpp stuff
-    "clangd",
-    "clang-format",
-
-    -- python stuff
-    "pyright",
-
-    -- ruby stuff
-    "solargraph",
-    "rubocop",
-
-    -- go stuff
-    "gopls",
-
-    -- rust stuff
-    "rust-analyzer",
-
-    "java_language_server",
-
-    -- bash stuff
+    "ansible-language-server",
+    "ast-grep",
     "bash-language-server",
-
-    "mrksman",
+    "clang-format",
+    "clangd",
+    "css-lsp",
+    "deno",
+    "docker-compose-language-service",
+    "dockerfile-language-server",
+    "gopls",
+    "gradle-language-server",
+    "html-lsp",
+    "java-language-server",
+    "jinja-lsp",
+    "json-lsp",
+    "kotlin-language-server",
+    "lua-language-server",
+    "marksman",
+    "nginx-language-server",
+    "prettier",
+    "pyright",
+    "rubocop",
+    "rust-analyzer",
+    "solargraph",
+    "sorbet",
+    "sqls",
+    "stylua",
+    "terraform-ls",
+    "typescript-language-server",
+    "vetur-vls",
+    "vim-language-server",
+    "vue-language-server",
+    "yaml-language-server",
   },
 }
 
