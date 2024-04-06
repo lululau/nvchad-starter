@@ -59,8 +59,12 @@ local plugins = {
     config = function()
       require("nvim-tree").setup {
         on_attach = nvim_tree_attach,
-    }
+      }
     end,
+    keys = {
+      { "<leader>ni", "<cmd>NvimTreeFindFile<cr>", desc = "Find file in NvimTree" },
+      { ",ni", "<cmd>NvimTreeFindFile<cr>", desc = "Find file in NvimTree" },
+    }
   },
 
   -- Install a plugin
@@ -337,7 +341,8 @@ local plugins = {
       return options
     end,
     keys = {
-      {"<M-/>", function() require("cmp").complete() end, mode = "i" }
+      {"<M-/>", function() require("cmp").complete() end, mode = "i" },
+      {"<M-/>", function() require("cmp").complete() end, mode = "n" }
     },
   },
 
