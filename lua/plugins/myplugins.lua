@@ -141,6 +141,21 @@ local plugins = {
     end
   },
 
+  -- {
+  --   'lululau/telescope-files.nvim',
+  --   event = "FileType dired",
+  --   config = function()
+  --     local group = vim.api.nvim_create_augroup("dired-telescope-files", {})
+  --     vim.api.nvim_create_autocmd("FileType", {
+  --       pattern = "dired",
+  --       group = group,
+  --       callback = function()
+  --         vim.keymap.set('n', 'f', '<cmd>Telescope files<cr>', { buffer = true, noremap = true, silent = true })
+  --       end
+  --     })
+  --   end
+  -- },
+
   {
     "lululau/nvterm",
     config = function ()
