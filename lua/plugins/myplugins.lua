@@ -796,8 +796,33 @@ local plugins = {
       ))
 
     end,
-  }
+  },
 
+  -- {
+  --   'girishji/devdocs.vim',
+  --   keys = {
+  --     {"<leader>dd", "<cmd>DevdocsFind<cr>", desc = "Open DevDocs"},
+  --     {"<leader>dI", "<cmd>DevdocsInstall<cr>", desc = "Install DevDocs"},
+  --     {"<leader>dU", "<cmd>DevdocsUninstall<cr>", desc = "Uninstall DevDocs"},
+  --   }
+  -- },
+
+
+  {
+    "luckasRanarison/nvim-devdocs",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    keys = {
+      {"<leader>dd", "<cmd>DevdocsOpen<cr>", desc = "Open DevDocs"},
+      {"<leader>dI", "<cmd>DevdocsInstall<cr>", desc = "Install DevDocs"},
+      {"<leader>dU", "<cmd>DevdocsUninstall<cr>", desc = "Uninstall DevDocs"},
+      {"<leader>dF", "<cmd>DevdocsFetch<cr>", desc = "Fetch DevDocs Metadata"},
+    },
+    opts = {}
+  }
 }
 
 if vim.fn.has("mac") == 1 then
