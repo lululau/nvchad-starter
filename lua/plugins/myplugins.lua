@@ -825,7 +825,7 @@ local plugins = {
       },
       {
         -- Open in the current working directory
-        "<leader>cw",
+        "<leader>jd",
         function()
           require("yazi").yazi(nil, vim.fn.getcwd())
         end,
