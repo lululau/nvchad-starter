@@ -21,7 +21,7 @@ if vim.g.neovide then
     -- vim.g.neovide_transparency = 0.8
     -- vim.g.transparency = 0.8
     -- vim.g.neovide_background_color = string.format("#272c36%x", math.floor(255 * vim.g.transparency))
-    vim.g.neovide_input_macos_alt_is_meta = true
+    vim.g.neovide_input_macos_option_key_is_meta = true
 end
 
 if vim.g.started_by_firenvim then
