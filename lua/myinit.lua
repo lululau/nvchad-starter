@@ -61,5 +61,16 @@ if vim.g.started_by_firenvim then
   end
 end
 
+function _G.map_q_for_neogit()
+  -- Get the current buffer name
+  local bufname = vim.fn.expand('%:t')
+  
+  -- Check if the buffer name ends with 'NeogitStatus'
+  if bufname:match('NeogitStatus$') then
+    -- Set the key mapping for the current buffer
+    vim.api.nvim_buf_set_keymap(0, 'n', 'q', ':qa!<CR>', { noremap = true, silent = true })
+  end
+end
+
 require "misc"
 require "space"
