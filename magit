@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if ! git status &> /dev/null; then
+   echo Not a git repository.
+   exit 1
+fi
+
+nvim -c '
+  execute "autocmd User NeogitStatusRefreshed lua map_q_for_neogit()"
+  execute "Neogit"
+'
