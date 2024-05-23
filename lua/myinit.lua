@@ -50,15 +50,6 @@ if vim.g.started_by_firenvim then
     }
 
   }
-
-  local handle = io.popen("system_profiler SPDisplaysDataType | grep -E '5120|Retina'")
-  local result = handle:read("*a")
-  handle:close()
-  if result ~= "" then
-    vim.cmd "set guifont=JetBrainsMono\\ Nerd\\ Font:h18"
-  else
-    vim.cmd "set guifont=JetBrainsMono\\ Nerd\\ Font:h11"
-  end
 end
 
 require "misc"
