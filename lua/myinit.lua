@@ -6,6 +6,7 @@
 --   command = "tabdo wincmd =",
 -- })
 
+vim.diagnostic.config({ virtual_text = false, signs = false, underline = false, update_in_insert = false })
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.title = true
