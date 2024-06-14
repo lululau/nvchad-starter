@@ -57,7 +57,6 @@ M.mason = {
     "rubocop",
     "rust-analyzer",
     "solargraph",
-    "sorbet",
     "sqls",
     "stylua",
     "terraform-ls",
