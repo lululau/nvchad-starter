@@ -210,13 +210,15 @@ map("n", "<M-x>", "<cmd>Telescope commands<cr>", { desc = "Show all commands", s
 map("n", "<leader>ss", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "search current buffer", silent = true, nowait = false })
 map("n", "<D-a>", "ggVG", { desc = "Select all", silent = true, nowait = true })
 
-local diagnostics_active = true
+local diagnostics_active = false
 local toggle_diagnostics = function()
   diagnostics_active = not diagnostics_active
   if diagnostics_active then
     vim.diagnostic.show()
+    vim.diagnostic.config({ virtual_text = false, signs = false, underline = false, update_in_insert = false })
   else
     vim.diagnostic.hide()
+    vim.diagnostic.config({ virtual_text = true, signs = true, underline = true, update_in_insert = true })
   end
 end
 
