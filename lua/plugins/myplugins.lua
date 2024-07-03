@@ -839,6 +839,14 @@ local plugins = {
   },
 
   {
+    'stevearc/oil.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    cmd = "Oil",
+  },
+
+  {
     "luckasRanarison/nvim-devdocs",
     dependencies = {
       "nvim-lua/plenary.nvim",
