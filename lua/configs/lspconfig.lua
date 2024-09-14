@@ -8,7 +8,7 @@ local servers = {
   "ansiblels", "ast_grep", "docker_compose_language_service", "dockerls", "ruby_lsp",
   "gradle_ls", "jinja_lsp", "jsonls", "kotlin_language_server", "nginx_language_server",
   "sqls", "terraform_lsp", "vuels", "vimls", "volar",
-  "html", "cssls", "tsserver", "clangd", "lua_ls", "vimls", 
+  "html", "cssls", "ts_ls", "clangd", "lua_ls", "vimls", 
   "denols", "pyright", "solargraph", "rubocop",
   "gopls", "rust_analyzer", "bashls", "marksman"
 }
