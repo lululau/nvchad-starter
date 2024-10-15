@@ -4,29 +4,47 @@ local M = {}
 -- Path to overriding theme and highlights files
 local highlights = require "highlights"
 
-M.ui = {
+M.base46 = {
   theme = "palenight",
   theme_toggle = { "palenight", "material-lighter" },
 
   hl_override = highlights.override,
   hl_add = highlights.add,
+}
 
+M.ui = {
   tabufline = {
     show_numbers = true,
   },
-
-  nvdash = {
-    load_on_startup = true,
-    buttons = {
-      { "󰍉  Find File", "Spc f f", "Telescope find_files" },
-      { "󰈚  Recent Files", "Spc f r", "Telescope oldfiles" },
-      { "󰈭  Find Word", "Spc /", "Telescope live_grep" },
-      { "  Bookmarks", "Spc f b", "Telescope marks" },
-      { "  Themes", "Spc t h", "Telescope themes" },
-      { "  Mappings", "Spc h c", "NvCheatsheet" },
-    },
-  }
 }
+
+M.nvdash = {
+  load_on_startup = true,
+  buttons = {
+    { txt = "󰍉  Find File", keys = "Spc f f", cmd = "Telescope find_files" },
+    { txt = "󰈚  Recent Files", keys = "Spc f r", cmd = "Telescope oldfiles" },
+    { txt = "󰈭  Find Word", keys = "Spc /", cmd = "Telescope live_grep" },
+    { txt = "  Bookmarks", keys = "Spc f b", cmd = "Telescope marks" },
+    { txt = "  Themes", keys = "Spc t h", cmd = "Telescope themes" },
+    { txt = "  Mappings", keys = "Spc h c", cmd = "NvCheatsheet" },
+  },
+  header = {
+    "                            ",
+    "     ▄▄         ▄ ▄▄▄▄▄▄▄   ",
+    "   ▄▀███▄     ▄██ █████▀    ",
+    "   ██▄▀███▄   ███           ",
+    "   ███  ▀███▄ ███           ",
+    "   ███    ▀██ ███           ",
+    "   ███      ▀ ███           ",
+    "   ▀██ █████▄▀█▀▄██████▄    ",
+    "     ▀ ▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀   ",
+    "                            ",
+    "     Powered By Neovim    ",
+    "                            ",
+  },
+
+}
+
 
 -- autogroups
 local chadrc_group = vim.api.nvim_create_augroup("Chadrc", { clear = true })
