@@ -822,11 +822,18 @@ local plugins = {
         function()
           require("yazi").yazi()
         end,
+        desc = "open the file manager",
+      },
+      {
+        "<leader>jd",
+        function()
+          require("yazi").yazi()
+        end,
         desc = "Open the file manager",
       },
       {
         -- Open in the current working directory
-        "<leader>jd",
+        "<leader>jD",
         function()
           require("yazi").yazi(nil, vim.fn.getcwd())
         end,
