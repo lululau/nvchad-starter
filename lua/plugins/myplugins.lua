@@ -21,7 +21,7 @@ local plugins = {
     dependencies = {
       -- format & linting
       {
-        "jose-elias-alvarez/null-ls.nvim",
+        "lululau/null-ls.nvim",
         config = function()
           require "configs.null-ls"
         end,
@@ -103,7 +103,7 @@ local plugins = {
 
 
   {
-    'ahmedkhalf/project.nvim',
+    'lululau/project.nvim',
     lazy = false,
     config = function()
       require("project_nvim").setup {
