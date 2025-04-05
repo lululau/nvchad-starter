@@ -868,7 +868,9 @@ local plugins = {
       {"<leader>dF", "<cmd>DevdocsFetch<cr>", desc = "Fetch DevDocs Metadata"},
     },
     opts = {}
-  }
+  },
+
+  -- { 'augmentcode/augment.vim', lazy = false }
 }
 
 if vim.fn.has("mac") == 1 then
