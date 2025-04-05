@@ -892,7 +892,7 @@ if vim.fn.has("mac") == 1 then
           auto_trigger = true,
           debounce = 75,
           keymap = {
-            accept = "<S-Tab>", accept_word = "<M-f>", accept_line = "<M-n>", next = "<M-\\>", prev = "<M-[>", dismiss = "<C-g>",
+            accept = "<Tab>", accept_word = "<M-f>", accept_line = "<M-n>", next = "<M-\\>", prev = "<M-[>", dismiss = "<C-g>",
           },
         },
       })
