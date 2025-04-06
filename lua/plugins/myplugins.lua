@@ -929,7 +929,26 @@ local plugins = {
         ft = { "markdown", "Avante" },
       },
     },
-  }
+  },
+
+
+  {
+
+    -- 使用本地路径加载插件
+    "lululau/neogit-ai-commit",
+    event = "VeryLazy",
+    cmd = "NeogitAICommit",
+    config = function()
+      require("neogit-ai-commit").setup({
+        -- API key 将从环境变量 OPENAI_API_KEY 中读取
+        api_url = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
+        model = "qwen-plus", -- 使用阿里云的 Qwen 模型
+        max_tokens =98304 
+      })
+    end,
+  },
+
+
   -- { 'augmentcode/augment.vim', lazy = false }
 }
 
