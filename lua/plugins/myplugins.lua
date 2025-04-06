@@ -892,7 +892,9 @@ if vim.fn.has("mac") == 1 then
         suggestion = {
           enabled = true,
           auto_trigger = true,
+          -- hide_during_completion = true,
           debounce = 75,
+          trigger_on_accept = true,
           keymap = {
             accept = "<Tab>", accept_word = "<M-f>", accept_line = "<M-n>", next = "<M-\\>", prev = "<M-[>", dismiss = "<C-g>",
           },
