@@ -49,7 +49,7 @@ map("n", "<c-x><c-o><c-a>", function() vim.lsp.buf.declaration() end, { desc = "
 map({"n", "i"}, "<c-x><c-o><c-b>", function() require('telescope.builtin').lsp_references() end, { desc = "LSP references"})
 map("n", "<C-x>@sg", function() require("neogit").open({kind = "auto"}) end, { desc = "Open Neogit", silent = true})
 map("n", "<leader>?", function() require('telescope.builtin').keymaps() end, { desc = "Show Keymaps"})
-map("i", "<D-q>", "<ESC>l", { desc = "Enter normal mode" })
+map("i", "<D-q>", "<ESC>", { desc = "Enter normal mode" })
 map("i", "<C-k>", "<End>", { desc = "Move to end of line" })
 map("i", "<D-j>", "<C-o>10j", { desc = "Move down 10 lines" })
 map("i", "<D-k>", "<C-o>10k", { desc = "Move up 10 lines" })
