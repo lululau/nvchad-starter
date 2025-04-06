@@ -63,6 +63,11 @@ vim.api.nvim_create_autocmd("BufLeave", {
 })
 
 
+-- Disable vim.deprecate
+vim.deprecate = function()
+end
+
+
 -- M.plugins = "plugins"
 
 -- check core.mappings for table structure
