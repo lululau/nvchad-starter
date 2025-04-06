@@ -77,3 +77,27 @@ end
 
 require "misc"
 require "space"
+
+-- Read OPENAI_API_KEY from ~/.authinfo
+local function set_openai_api_key()
+  local home = os.getenv("HOME")
+  local authinfo_path = home .. "/.authinfo"
+  local file = io.open(authinfo_path, "r")
+  
+  if file then
+    for line in file:lines() do
+      -- Look for dashscope.aliyuncs.com entry
+      if line:match("dashscope%.aliyuncs%.com") then
+        -- Extract password field which contains the API key
+        local api_key = line:match("password ([^ ]+)")
+        if api_key then
+          vim.env.OPENAI_API_KEY = api_key
+          break
+        end
+      end
+    end
+    file:close()
+  end
+end
+
+set_openai_api_key()
