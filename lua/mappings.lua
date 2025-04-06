@@ -2,6 +2,7 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
+map("i", "<D-i>", "<ESC>", { desc = "Enter Normal mode" })
 map("v", "<D-q>", "<ESC>", { desc = "Enter normal mode" })
 map("v", ">", ">gv", { desc = "indent" })
 map("v", "<", "<gv", { desc = "indent" })
