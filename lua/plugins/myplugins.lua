@@ -937,7 +937,7 @@ local plugins = {
   {
 
     -- 使用本地路径加载插件
-    "lululau/neogit-ai-commit",
+    "lululau/neogit-ai-commit.nvim",
     event = "VeryLazy",
     cmd = "NeogitAICommit",
     config = function()
