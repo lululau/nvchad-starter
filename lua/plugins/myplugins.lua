@@ -883,7 +883,7 @@ local plugins = {
         model = "qwen-plus", -- 您想要的模型（或使用 gpt-4o 等）
         timeout = 30000, -- 超时时间（毫秒），增加此值以适应推理模型
         temperature = 0,
-        max_tokens = 98304, -- 增加此值以包括推理模型的推理令牌
+        max_tokens = 8192, -- 增加此值以包括推理模型的推理令牌
         --reasoning_effort = "medium", -- low|medium|high，仅用于推理模型
       },
       mappings = {
