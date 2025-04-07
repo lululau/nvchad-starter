@@ -248,3 +248,16 @@ map({"n", "x", "o"}, "[c", function()
 end, { desc = "Prev Hunk" })
 
 map("n", "<D-r><D-u>", "<cmd>Lazy sync<CR>", { desc = "Update packages (Lazy sync)" })
+
+-- Function to delete the current file without confirmation
+local delete_current_file = function()
+  local file_path = vim.fn.expand("%:p")
+  if file_path ~= "" then
+    vim.cmd("silent !rm " .. vim.fn.shellescape(file_path))
+    vim.cmd("bdelete!")
+  else
+    vim.notify("No file to delete", vim.log.levels.WARN)
+  end
+end
+
+map("n", "<leader>fD", function() delete_current_file() end, { desc = "Delete current file without confirmation" })
