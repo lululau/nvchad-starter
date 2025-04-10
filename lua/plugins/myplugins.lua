@@ -189,16 +189,16 @@ local plugins = {
 
     keys = {
       { "<D-CR>", function()
-        require("nvterm.terminal").self_send("cd " .. vim.g.last_project_directory .. "\n")
+        require("nvterm.terminal").self_send("cd " .. vim.g.last_project_directory)
       end, mode = "t" },
       { "<C-x><C-o><C-a>", function()
-        require("nvterm.terminal").self_send("cd " .. vim.g.last_project_directory .. "\n")
+        require("nvterm.terminal").self_send("cd " .. vim.g.last_project_directory)
       end, mode = "t" },
       { "<S-CR>", function()
-        require("nvterm.terminal").self_send("cd " .. vim.g.last_file_directory .. "\n")
+        require("nvterm.terminal").self_send("cd " .. vim.g.last_file_directory)
       end, mode = "t"},
       { "<C-x><C-o><C-b>", function()
-        require("nvterm.terminal").self_send("cd " .. vim.g.last_file_directory .. "\n")
+        require("nvterm.terminal").self_send("cd " .. vim.g.last_file_directory)
       end, mode = "t"},
       {"<D-w>", function() 
         local win = vim.api.nvim_get_current_win()
@@ -207,6 +207,11 @@ local plugins = {
       {"<C-x>@sw", function() 
         local win = vim.api.nvim_get_current_win()
         vim.api.nvim_win_close(win, true)
+      end, mode = "t"},
+      {"<D-v>", function()
+        local clipboard = vim.fn.getreg("+")
+        clipboard = clipboard:gsub("\n*$", "")
+        require("nvterm.terminal").self_send(clipboard)
       end, mode = "t"},
     }
   },
