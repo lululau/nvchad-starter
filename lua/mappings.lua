@@ -261,3 +261,7 @@ local delete_current_file = function()
 end
 
 map("n", "<leader>fD", function() delete_current_file() end, { desc = "Delete current file without confirmation" })
+
+if vim.o.readonly then
+  map("n", "q", "<cmd> q! <CR>", { desc = "Force quit" })
+end

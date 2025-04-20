@@ -19,7 +19,7 @@ M.ui = {
 }
 
 M.nvdash = {
-  load_on_startup = true,
+  load_on_startup = not vim.o.readonly,
   buttons = {
     { txt = "󰍉  Find File", keys = "Spc f f", cmd = "Telescope find_files" },
     { txt = "󰈚  Recent Files", keys = "Spc f r", cmd = "Telescope oldfiles" },
