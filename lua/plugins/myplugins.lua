@@ -16,6 +16,16 @@ local plugins = {
 
   -- Override plugin definition options
 
+
+  {
+    "nvchad/base46",
+    branch = "v3.0",
+    build = function()
+      require("base46").load_all_highlights()
+    end,
+  },
+
+
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -961,6 +971,7 @@ local plugins = {
     end,
   },
 
+  { import = "nvchad.blink.lazyspec" }
 
   -- { 'augmentcode/augment.vim', lazy = false }
 }
