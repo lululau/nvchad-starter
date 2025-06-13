@@ -898,11 +898,12 @@ local plugins = {
     opts = {
       -- 在此处添加任何选项
       -- 例如
-      provider = "openai",
+      provider = "qwen",
       providers = {
-        openai = {
+        qwen = {
+          __inherited_from = "openai",
           endpoint = "https://dashscope.aliyuncs.com/compatible-mode/v1",
-          model = "qwen-plus", -- 您想要的模型（或使用 gpt-4o 等）
+          model = "qwen-coder-plus-latest", -- 您想要的模型（或使用 gpt-4o 等）
           timeout = 30000, -- 超时时间（毫秒），增加此值以适应推理模型
           extra_request_body = {
             temperature = 0,
