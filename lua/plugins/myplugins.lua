@@ -976,7 +976,77 @@ local plugins = {
     end,
   },
 
-  { import = "nvchad.blink.lazyspec" }
+  -- { import = "nvchad.blink.lazyspec" }
+
+  {
+    {
+      "hrsh7th/nvim-cmp",
+      enabled = false,
+    },
+
+    {
+      "saghen/blink.cmp",
+      version = "1.*",
+      event = { "InsertEnter", "CmdLineEnter" },
+
+      dependencies = {
+        "rafamadriz/friendly-snippets",
+        {
+          -- snippet plugin
+          "L3MON4D3/LuaSnip",
+          dependencies = "rafamadriz/friendly-snippets",
+          opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+          config = function(_, opts)
+            require("luasnip").config.set_config(opts)
+            require "nvchad.configs.luasnip"
+          end,
+        },
+
+        {
+          "windwp/nvim-autopairs",
+          opts = {
+            fast_wrap = {},
+            disable_filetype = { "TelescopePrompt", "vim" },
+          },
+        },
+      },
+
+      opts_extend = { "sources.default" },
+
+      opts = function()
+        return {
+          snippets = { preset = "luasnip" },
+          cmdline = { enabled = true },
+          appearance = { nerd_font_variant = "normal" },
+          fuzzy = { implementation = "prefer_rust" },
+          sources = { default = { "lsp", "snippets", "buffer", "path" } },
+
+          keymap = {
+            preset = "default",
+            ["<CR>"] = { "accept", "fallback" },
+            ["<C-b>"] = { "scroll_documentation_up", "fallback" },
+            ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+            ["<C-n>"] = { "select_next", "snippet_forward", "fallback" },
+            ["<C-p>"] = { "select_prev", "snippet_backward", "fallback" },
+          },
+
+          completion = {
+            ghost_text = { enabled = true },
+            documentation = {
+              auto_show = true,
+              auto_show_delay_ms = 200,
+              window = { border = "single" },
+            },
+
+            -- from nvchad/ui plugin
+            -- exporting the ui config of nvchad blink menu
+            -- helps non nvchad users
+            menu = require("nvchad.blink").menu,
+          },
+        }
+      end,
+    },
+  }
 
   -- { 'augmentcode/augment.vim', lazy = false }
 }
