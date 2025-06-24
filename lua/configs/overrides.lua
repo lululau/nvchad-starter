@@ -34,7 +34,7 @@ M.treesitter = {
 M.mason = {
   ensure_installed = {
     "ansible-language-server",
-    "ast-grep",
+    -- "ast-grep",
     "bash-language-server",
     "clang-format",
     "clangd",
