@@ -66,6 +66,9 @@ M.mason = {
     "vue-language-server",
     "yaml-language-server",
   },
+  -- registries = {
+  --   "github:lululau/mason-registry",
+  -- },
 }
 
 -- git support in nvimtree

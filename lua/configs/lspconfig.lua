@@ -25,6 +25,14 @@ lspconfig.java_language_server.setup {
   cmd = { "java-language-server" },
   on_attach = on_attach,
   capabilities = capabilities,
+  handlers = {
+    ['client/registerCapability'] = function(err, result, ctx, config)
+      local registration = {
+        registrations = { result },
+      }
+      return vim.lsp.handlers['client/registerCapability'](err, registration, ctx, config)
+    end
+  },
 }
 
 -- 
