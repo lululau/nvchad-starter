@@ -80,7 +80,7 @@ require "misc"
 require "space"
 
 -- Read OPENAI_API_KEY from ~/.authinfo
-local function set_openai_api_key()
+local function set_api_keys()
   local home = os.getenv("HOME")
   local authinfo_path = home .. "/.authinfo"
   local file = io.open(authinfo_path, "r")
@@ -93,7 +93,14 @@ local function set_openai_api_key()
         local api_key = line:match("password ([^ ]+)")
         if api_key then
           vim.env.OPENAI_API_KEY = api_key
-          break
+        end
+      end
+
+      if line:match("moonshot%.cn") then
+        -- Extract password field which contains the API key
+        local api_key = line:match("password ([^ ]+)")
+        if api_key then
+          vim.env.MOONSHOT_API_KEY = api_key
         end
       end
     end
@@ -101,4 +108,4 @@ local function set_openai_api_key()
   end
 end
 
-set_openai_api_key()
+set_api_keys()

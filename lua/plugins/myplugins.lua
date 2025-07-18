@@ -898,8 +898,17 @@ local plugins = {
     opts = {
       -- 在此处添加任何选项
       -- 例如
-      provider = "qwen",
+      provider = "moonshot",
       providers = {
+        moonshot = {
+          endpoint = "https://api.moonshot.cn/v1",
+          model = "kimi-k2-0711-preview",
+          timeout = 30000, -- Timeout in milliseconds
+          extra_request_body = {
+            temperature = 0.75,
+            max_tokens = 32768,
+          },
+        },
         qwen = {
           __inherited_from = "openai",
           endpoint = "https://dashscope.aliyuncs.com/compatible-mode/v1",
