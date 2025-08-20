@@ -262,6 +262,25 @@ end
 
 map("n", "<leader>fD", function() delete_current_file() end, { desc = "Delete current file without confirmation" })
 
+-- Function to close all buffers except current one
+local close_all_other_buffers = function()
+  local current_buf = vim.api.nvim_get_current_buf()
+  local buffers = vim.api.nvim_list_bufs()
+
+  for _, buf in ipairs(buffers) do
+    if buf ~= current_buf and vim.api.nvim_buf_is_loaded(buf) then
+      local buf_type = vim.api.nvim_buf_get_option(buf, "buftype")
+      if buf_type == "" then -- Only close normal buffers
+        vim.api.nvim_buf_delete(buf, {})
+      end
+    end
+  end
+
+  vim.notify("Closed all other buffers", vim.log.levels.INFO)
+end
+
+map("n", "<C-x><C-k>", function() close_all_other_buffers() end, { desc = "Close all other buffers" })
+
 if vim.o.readonly then
   map("n", "q", "<cmd> q! <CR>", { desc = "Force quit" })
 end
