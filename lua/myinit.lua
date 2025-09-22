@@ -14,6 +14,8 @@ vim.o.smartcase = true
 vim.o.title = true
 vim.o.titlestring = "%{fnamemodify(getcwd(), ':p:h:t') .. '        ' .. expand('%:p:~')}"
 
+vim.g.neovide_show_border = true
+
 vim.api.nvim_set_keymap('i', '<S- >', '<ESC><leader>', {noremap = false, silent = true})
 vim.api.nvim_set_keymap('i', '<C-x>@S ', '<ESC><leader>', {noremap = false, silent = true})
 vim.api.nvim_set_keymap('n', '<C-x>@S ', '<ESC><leader>', {noremap = false, silent = true})
