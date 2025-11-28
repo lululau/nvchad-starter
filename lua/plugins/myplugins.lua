@@ -936,7 +936,7 @@ local plugins = {
         }
       },
       mappings = {
-        ask = vim.g.neovide and "<D-i>" or "<leader>aa",
+        ask = vim.g.neovide and "<D-S-i>" or "<leader>aa",
       },
     },
     -- 如果您想从源代码构建，请执行 `make BUILD_FROM_SOURCE=true`
