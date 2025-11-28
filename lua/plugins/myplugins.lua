@@ -984,6 +984,42 @@ local plugins = {
 
 
   {
+    "coder/claudecode.nvim",
+    dependencies = { "folke/snacks.nvim" },
+    config = true,
+    opts= {
+      terminal_cmd = "claude --dangerously-skip-permissions"
+    },
+    keys = {
+      { "<D-i><D-a>", nil, desc = "AI/Claude Code" },
+      { "<D-i><D-a>c", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+      { "<D-i><D-a>f", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
+      { "<D-i><D-a>r", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
+      { "<D-i><D-a>C", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+      { "<D-i><D-a>m", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
+      { "<D-i><D-a>b", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
+      { "<D-i><D-a>s", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+      {"<D-i><D-a>s", "<cmd>ClaudeCodeTreeAdd<cr>", desc = "Add file", ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" }, },
+      -- Diff management
+      { "<D-i><D-a>a", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+      { "<D-i><D-a>d", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
+      { "<leader>cc", nil, desc = "AI/Claude Code" },
+      { "<leader>ccc", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+      { "<leader>ccf", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
+      { "<leader>ccr", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
+      { "<leader>ccC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+      { "<leader>ccm", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
+      { "<leader>ccb", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
+      { "<leader>ccs", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+      {"<leader>ccs", "<cmd>ClaudeCodeTreeAdd<cr>", desc = "Add file", ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" }, },
+      -- Diff management
+      { "<leader>cca", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+      { "<leader>ccd", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
+    },
+  },
+
+
+  {
 
     -- 使用本地路径加载插件
     "lululau/neogit-ai-commit.nvim",
