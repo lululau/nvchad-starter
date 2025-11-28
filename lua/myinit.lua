@@ -105,6 +105,15 @@ local function set_api_keys()
           vim.env.MOONSHOT_API_KEY = api_key
         end
       end
+
+      if line:match("bigmodel%.cn") then
+        -- Extract password field which contains the API key
+        local api_key = line:match("password ([^ ]+)")
+        if api_key then
+          vim.env.GLM_API_KEY = api_key
+        end
+      end
+
     end
     file:close()
   end

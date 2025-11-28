@@ -907,8 +907,13 @@ local plugins = {
     opts = {
       -- 在此处添加任何选项
       -- 例如
-      provider = "moonshot",
+      provider = "glm",
       providers = {
+        glm = {
+          endpoint = "https://open.bigmodel.cn/api/coding/paas/v4",
+          model = "GLM-4.6", -- 您想要的模型
+          timeout = 30000, -- 超时时间（毫秒），增加此值以适应推理模型
+        },
         moonshot = {
           endpoint = "https://api.moonshot.cn/v1",
           model = "kimi-k2-0711-preview",
