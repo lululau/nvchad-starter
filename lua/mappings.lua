@@ -13,7 +13,37 @@ map("n", "<A-h>", "<C-w>h", { desc = "Window left" })
 map("n", "<A-l>", "<C-w>l", { desc = "Window right" })
 map("n", "<A-j>", "<C-w>j", { desc = "Window down" })
 map("n", "<A-k>", "<C-w>k", { desc = "Window up" })
-map("n", "<leader>tc", ":Copilot toggle<CR>", { desc = "Toggle Copilot Completion" })
+map("n", "<leader>tc", function()
+  -- Check if copilot client is available and attached to current buffer
+  local ok, copilot_client = pcall(require, "copilot.client")
+  if not ok then
+    vim.notify("Copilot not available", vim.log.levels.ERROR)
+    return
+  end
+
+  local is_attached = copilot_client.buf_is_attached(0)
+
+  -- Toggle the state
+  local ok, copilot_cmd = pcall(require, "copilot.command")
+  if not ok then
+    vim.notify("Copilot command not available", vim.log.levels.ERROR)
+    return
+  end
+
+  copilot_cmd.toggle()
+
+  -- Show status feedback
+  local new_state = copilot_client.buf_is_attached(0)
+  if new_state then
+    if not is_attached then
+      vim.notify(" 🤖 Copilot Enabled", vim.log.levels.INFO)
+    end
+  else
+    if is_attached then
+      vim.notify(" ⏸️ Copilot Disabled", vim.log.levels.INFO)
+    end
+  end
+end, { desc = "Toggle Copilot Completion with Status" })
 map("n", "<leader>tn", "<cmd> set nu! <CR>", { desc = "Toggle line number" })
 map("n", "<leader>bn", "<cmd> enew <CR>", { desc = "New buffer" })
 map("n", "<leader>bs", "<cmd> enew <CR>", { desc = "New buffer" })
