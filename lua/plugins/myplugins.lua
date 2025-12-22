@@ -911,7 +911,7 @@ local plugins = {
       providers = {
         glm = {
           endpoint = "https://open.bigmodel.cn/api/coding/paas/v4",
-          model = "GLM-4.6", -- 您想要的模型
+          model = "GLM-4.7", -- 您想要的模型
           timeout = 30000, -- 超时时间（毫秒），增加此值以适应推理模型
         },
         moonshot = {
