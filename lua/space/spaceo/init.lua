@@ -1,5 +1,6 @@
 local map = vim.keymap.set
 
+map("n", "<leader>oda", function() require("yazi").yazi(nil, "~/global-claude/") end, { desc = "Open global-claude directory" })
 map("n", "<leader>odA", function() require("yazi").yazi(nil, "/Applications") end, { desc = "Open applications directory" })
 map("n", "<leader>odb", function() require("yazi").yazi(nil, "~/blog") end, { desc = "Open blog directory" })
 map("n", "<leader>odB", function() require("yazi").yazi(nil, "~/bin") end, { desc = "Open bin directory" })
