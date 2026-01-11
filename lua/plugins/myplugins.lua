@@ -907,6 +907,12 @@ local plugins = {
     opts = {
       -- 在此处添加任何选项
       -- 例如
+      acp_providers = {
+        ["opencode"] = {
+          command = "opencode",
+          args = { "acp" }
+        }
+      },
       provider = "glm",
       providers = {
         glm = {
