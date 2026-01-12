@@ -988,41 +988,83 @@ local plugins = {
     },
   },
 
-
   {
-    "coder/claudecode.nvim",
-    dependencies = { "folke/snacks.nvim" },
-    config = true,
-    opts= {
-      terminal_cmd = "claude --dangerously-skip-permissions"
+    "NickvanDyke/opencode.nvim",
+    dependencies = {
+      -- Recommended for `ask()` and `select()`.
+      -- Required for `snacks` provider.
+      ---@module 'snacks' <- Loads `snacks.nvim` types for configuration intellisense.
+      { "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
     },
     keys = {
-      { "<D-i><D-a>", nil, desc = "AI/Claude Code" },
-      { "<D-i><D-a>c", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
-      { "<D-i><D-a>f", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
-      { "<D-i><D-a>r", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
-      { "<D-i><D-a>C", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
-      { "<D-i><D-a>m", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
-      { "<D-i><D-a>b", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
-      { "<D-i><D-a>s", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
-      {"<D-i><D-a>s", "<cmd>ClaudeCodeTreeAdd<cr>", desc = "Add file", ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" }, },
-      -- Diff management
-      { "<D-i><D-a>a", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
-      { "<D-i><D-a>d", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
-      { "<leader>cc", nil, desc = "AI/Claude Code" },
-      { "<leader>ccc", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
-      { "<leader>ccf", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
-      { "<leader>ccr", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
-      { "<leader>ccC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
-      { "<leader>ccm", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
-      { "<leader>ccb", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
-      { "<leader>ccs", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
-      {"<leader>ccs", "<cmd>ClaudeCodeTreeAdd<cr>", desc = "Add file", ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" }, },
-      -- Diff management
-      { "<leader>cca", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
-      { "<leader>ccd", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
+      {"<C-a>", desc = "Ask opencode" },
+      {"<C-x>", desc = "Execute opencode action…" },
+      {"<D-i>", desc = "Toggle opencode" },
+      {"go",  desc = "Add range to opencode" },
+      {"goo", desc = "Add line to opencode" },
+      {"<S-C-u>", desc = "opencode half page up" },
+      {"<S-C-d>", desc = "opencode half page down" },
     },
+    config = function()
+      ---@type opencode.Opts
+      vim.g.opencode_opts = {
+        -- Your configuration, if any — see `lua/opencode/config.lua`, or "goto definition".
+      }
+
+      -- Required for `opts.events.reload`.
+      vim.o.autoread = true
+
+      -- Recommended/example keymaps.
+      vim.keymap.set({ "n", "x" }, "<C-a>", function() require("opencode").ask("@this: ", { submit = true }) end, { desc = "Ask opencode" })
+      vim.keymap.set({ "n", "x" }, "<C-x>", function() require("opencode").select() end,                          { desc = "Execute opencode action…" })
+      vim.keymap.set({ "n", "t" }, "<D-i>", function() require("opencode").toggle() end,                          { desc = "Toggle opencode" })
+
+      vim.keymap.set({ "n", "x" }, "go",  function() return require("opencode").operator("@this ") end,        { expr = true, desc = "Add range to opencode" })
+      vim.keymap.set("n",          "goo", function() return require("opencode").operator("@this ") .. "_" end, { expr = true, desc = "Add line to opencode" })
+
+      vim.keymap.set("n", "<S-C-u>", function() require("opencode").command("session.half.page.up") end,   { desc = "opencode half page up" })
+      vim.keymap.set("n", "<S-C-d>", function() require("opencode").command("session.half.page.down") end, { desc = "opencode half page down" })
+
+      -- You may want these if you stick with the opinionated "<C-a>" and "<C-x>" above — otherwise consider "<leader>o".
+      vim.keymap.set("n", "+", "<C-a>", { desc = "Increment", noremap = true })
+      vim.keymap.set("n", "-", "<C-x>", { desc = "Decrement", noremap = true })
+    end,
   },
+
+  -- {
+  --   "coder/claudecode.nvim",
+  --   dependencies = { "folke/snacks.nvim" },
+  --   config = true,
+  --   opts= {
+  --     terminal_cmd = "claude --dangerously-skip-permissions"
+  --   },
+  --   keys = {
+  --     { "<D-i><D-a>", nil, desc = "AI/Claude Code" },
+  --     { "<D-i><D-a>c", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+  --     { "<D-i><D-a>f", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
+  --     { "<D-i><D-a>r", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
+  --     { "<D-i><D-a>C", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+  --     { "<D-i><D-a>m", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
+  --     { "<D-i><D-a>b", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
+  --     { "<D-i><D-a>s", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+  --     {"<D-i><D-a>s", "<cmd>ClaudeCodeTreeAdd<cr>", desc = "Add file", ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" }, },
+  --     -- Diff management
+  --     { "<D-i><D-a>a", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+  --     { "<D-i><D-a>d", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
+  --     { "<leader>cc", nil, desc = "AI/Claude Code" },
+  --     { "<leader>ccc", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+  --     { "<leader>ccf", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
+  --     { "<leader>ccr", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
+  --     { "<leader>ccC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+  --     { "<leader>ccm", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
+  --     { "<leader>ccb", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
+  --     { "<leader>ccs", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+  --     {"<leader>ccs", "<cmd>ClaudeCodeTreeAdd<cr>", desc = "Add file", ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" }, },
+  --     -- Diff management
+  --     { "<leader>cca", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+  --     { "<leader>ccd", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
+  --   },
+  -- },
 
 
   {
