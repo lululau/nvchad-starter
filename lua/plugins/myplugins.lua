@@ -746,6 +746,15 @@ local plugins = {
   },
 
   {
+    -- 如果您有 lazy=true，请确保正确设置
+    'MeanderingProgrammer/render-markdown.nvim',
+    opts = {
+      file_types = { "markdown", "Avante" },
+    },
+    ft = { "markdown", "Avante" },
+  },
+
+  {
     'yaocccc/nvim-hl-mdcodeblock.lua',
     config = function ()
       require('hl-mdcodeblock').setup({})
