@@ -752,6 +752,27 @@ local plugins = {
       file_types = { "markdown", "Avante" },
     },
     ft = { "markdown", "Avante" },
+    enabled = false, -- 由 markview.nvim 替代
+  },
+
+  {
+    "OXY2DEV/markview.nvim",
+    lazy = false,
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+    opts = {
+      preview = {
+        modes = { "n", "no", "c" },
+        hybrid_modes = { "i" },
+        linewise_hybrid_mode = true,
+      },
+    },
+    keys = {
+      { "<leader>mt", "<cmd>Markview toggle<cr>", desc = "Markview Toggle" },
+      { "<leader>ms", "<cmd>Markview splitToggle<cr>", desc = "Markview Splitview Toggle" },
+      { "<leader>mh", "<cmd>Markview HybridToggle<cr>", desc = "Markview Hybrid Toggle" },
+    },
   },
 
   {
