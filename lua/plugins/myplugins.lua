@@ -898,7 +898,8 @@ local plugins = {
       -- NES: 跳转/应用 Next Edit Suggestion (defined in mappings.lua to override NvChad)
       -- CLI 终端
       { "<D-i>", function() require("sidekick.cli").toggle() end, desc = "Sidekick Toggle", mode = { "n", "t" } },
-      { "<leader>aa", function() require("sidekick.cli").select() end, desc = "Select AI CLI" },
+      { "<leader>aa", function() require("sidekick.cli").toggle() end, desc = "Sidekick Toggle", mode = { "n", "t" } },
+      -- { "<leader>aa", function() require("sidekick.cli").select() end, desc = "Select AI CLI" },
       { "<leader>as", function() require("sidekick.cli").select() end, desc = "Select AI CLI" },
       { "<leader>ac", function() require("sidekick.cli").select({ name = "claude", focus = true }) end, desc = "Select Claude" },
       { "<leader>ag", function() require("sidekick.cli").select({ name = "gemini", focus = true }) end, desc = "Select Gemini" },
