@@ -23,13 +23,6 @@ M.treesitter = {
     "yaml",
     "vue"
   },
-  indent = {
-    enable = true,
-    disable = {
-      -- "python"
-      "java"
-    },
-  },
 }
 
 M.mason = {
