@@ -262,12 +262,36 @@ local plugins = {
     },
   },
 
-  -- NOTE: nvim-treesitter-textobjects 使用了已废弃的 require'nvim-treesitter.configs'.setup API
-  -- 该模块在新版 nvim-treesitter (main 分支) 中已不存在，等待插件适配后重新启用
-  -- {
-  --   "nvim-treesitter/nvim-treesitter-textobjects",
-  --   ...
-  -- },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
+    lazy = false,
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("nvim-treesitter-textobjects").setup {
+        select = {
+          lookahead = true,
+          selection_modes = {
+            ['@parameter.outer'] = 'v',
+            ['@function.outer'] = 'V',
+            ['@class.outer'] = '<c-v>',
+          },
+          include_surrounding_whitespace = true,
+        },
+      }
+
+      local select = require("nvim-treesitter-textobjects.select")
+      vim.keymap.set({ "x", "o" }, "af", function() select.select_textobject("@function.outer", "textobjects") end)
+      vim.keymap.set({ "x", "o" }, "if", function() select.select_textobject("@function.inner", "textobjects") end)
+      vim.keymap.set({ "x", "o" }, "aa", function() select.select_textobject("@parameter.outer", "textobjects") end)
+      vim.keymap.set({ "x", "o" }, "ia", function() select.select_textobject("@parameter.inner", "textobjects") end)
+      vim.keymap.set({ "x", "o" }, "ac", function() select.select_textobject("@class.outer", "textobjects") end)
+      vim.keymap.set({ "x", "o" }, "ic", function() select.select_textobject("@class.inner", "textobjects") end)
+      vim.keymap.set({ "x", "o" }, "as", function() select.select_textobject("@local.scope", "locals") end)
+    end
+  },
 
   -- NOTE: indent-tools 依赖 textobjects，暂时禁用
   -- {
