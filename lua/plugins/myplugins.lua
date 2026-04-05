@@ -873,6 +873,47 @@ local plugins = {
     opts = {}
   },
 
+  {
+    "folke/sidekick.nvim",
+    lazy = false,
+    dependencies = { "folke/snacks.nvim" },
+    opts = {
+      -- 终端布局
+      cli = {
+        win = {
+          layout = "right",
+          split = { width = 80 },
+          float = { width = 0.9, height = 0.9 },
+        },
+        -- 会话持久化（需要 tmux 或 zellij）
+        mux = {
+          backend = "tmux",
+          enabled = false,
+        },
+        -- picker 优先使用 snacks（你已安装）
+        picker = "snacks",
+      },
+    },
+    keys = {
+      -- NES: 跳转/应用 Next Edit Suggestion (defined in mappings.lua to override NvChad)
+      -- CLI 终端
+      { "<D-i>", function() require("sidekick.cli").toggle() end, desc = "Sidekick Toggle", mode = { "n", "t" } },
+      { "<leader>aa", function() require("sidekick.cli").select() end, desc = "Select AI CLI" },
+      { "<leader>as", function() require("sidekick.cli").select() end, desc = "Select AI CLI" },
+      { "<leader>ac", function() require("sidekick.cli").select({ name = "claude", focus = true }) end, desc = "Select Claude" },
+      { "<leader>ag", function() require("sidekick.cli").select({ name = "gemini", focus = true }) end, desc = "Select Gemini" },
+      { "<leader>ag", function() require("sidekick.cli").toggle({ name = "gemini", focus = true }) end, desc = "Toggle Gemini" },
+      -- 发送上下文到 AI
+      { "<leader>at", function() require("sidekick.cli").send({ msg = "{this}" }) end, mode = { "x", "n" }, desc = "Send This" },
+      { "<leader>af", function() require("sidekick.cli").send({ msg = "{file}" }) end, desc = "Send File" },
+      { "<leader>av", function() require("sidekick.cli").send({ msg = "{selection}" }) end, mode = "x", desc = "Send Selection" },
+      -- Prompt 库
+      { "<leader>ap", function() require("sidekick.cli").prompt() end, mode = { "n", "x" }, desc = "Select Prompt" },
+      -- NES 控制
+      { "<leader>an", function() require("sidekick.nes").update() end, desc = "NES Update" },
+      { "<leader>aN", function() require("sidekick.nes").clear() end, desc = "NES Clear" },
+    },
+  },
 
   -- {
   --   "yetone/avante.nvim",

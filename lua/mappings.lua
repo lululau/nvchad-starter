@@ -59,7 +59,7 @@ map("n", "]e", "<cmd> lua vim.diagnostic.goto_next()<CR>", { desc = "Next Error"
 map("n", "[e", "<cmd> lua vim.diagnostic.goto_prev()<CR>", { desc = "previous Error" })
 map("n", "<leader>el", "<cmd> Telescope diagnostics<CR>", { desc = "All Errors" })
 map("n", "<leader>fW", "<cmd> w !sudo tee % > /dev/null<CR>", { desc = "Write as root" })
-map("n", "<leader>ac", "<cmd> ChatGPT<CR>", { desc = "Open ChatGPT", silent = true})
+-- map("n", "<leader>ac", "<cmd> ChatGPT<CR>", { desc = "Open ChatGPT", silent = true})
 map("n", "<leader>'", function() require("nvterm.terminal").toggle "horizontal" end, { desc = "Open terminal" })
 map("n", "<D-'>", function() require("nvterm.terminal").toggle "horizontal" end, { desc = "Open terminal" })
 map("n", "<A-'>", function() require("nvterm.terminal").toggle "horizontal" end, { desc = "Open terminal" })
@@ -81,6 +81,13 @@ map("n", "<c-x><c-o><c-a>", function() vim.lsp.buf.declaration() end, { desc = "
 map({"n", "i"}, "<c-x><c-o><c-b>", function() require('telescope.builtin').lsp_references() end, { desc = "LSP references"})
 map("n", "<C-x>@sg", function() require("neogit").open({kind = "auto"}) end, { desc = "Open Neogit", silent = true})
 map("n", "<leader>?", function() require('telescope.builtin').keymaps() end, { desc = "Show Keymaps"})
+-- Sidekick NES: override NvChad's default <Tab> (buffer goto next)
+vim.keymap.set("n", "<Tab>", function()
+  if not require("sidekick").nes_jump_or_apply() then
+    -- fallback: NvChad's original buffer next
+    require("nvchad.tabufline").next()
+  end
+end, { desc = "NES Jump/Apply or Buffer Next" })
 map("i", "<D-q>", "<ESC>", { desc = "Enter normal mode" })
 map("i", "<C-k>", "<End>", { desc = "Move to end of line" })
 map("i", "<D-j>", "<C-o>10j", { desc = "Move down 10 lines" })

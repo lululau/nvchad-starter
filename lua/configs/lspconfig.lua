@@ -35,5 +35,5 @@ lspconfig.java_language_server.setup {
   },
 }
 
--- 
+--
 -- lspconfig.pyright.setup { blabla}
