@@ -1130,6 +1130,16 @@ local plugins = {
     end,
   },
 
+  {
+    "lululau/neogit-fire.nvim",
+    event = "VeryLazy",
+    cmd = { "NeogitFire", "NeogitFirePush" },
+    dependencies = { "NeogitOrg/neogit" },
+    config = function()
+      require("neogit-fire").setup()
+    end,
+  },
+
   -- { import = "nvchad.blink.lazyspec" }
 
   {
