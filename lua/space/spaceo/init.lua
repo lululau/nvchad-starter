@@ -18,6 +18,7 @@ map("n", "<leader>odk", function() require("yazi").yazi(nil, "~/sd") end, { desc
 map("n", "<leader>odK", function() require("yazi").yazi(nil, "~/kt") end, { desc = "Open kt directory" })
 map("n", "<leader>odl", function() require("yazi").yazi(nil, "~/lab") end, { desc = "Open lab directory" })
 map("n", "<leader>odp", function() require("yazi").yazi(nil, "~/Library/Application Support") end, { desc = "Open las directory" })
+map("n", "<leader>odL", function() require("yazi").yazi(nil, "~/Library/Application Support") end, { desc = "Open las directory" })
 map("n", "<leader>odP", function() require("yazi").yazi(nil, "~/Library/Preferences") end, { desc = "Open lp directory" })
 map("n", "<leader>odM", function() require("yazi").yazi(nil, "~/Movies") end, { desc = "Open movies directory" })
 map("n", "<leader>odm", function() require("yazi").yazi(nil, "~/Documents/materials") end, { desc = "Open materials directory" })
