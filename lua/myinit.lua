@@ -30,6 +30,50 @@ if vim.g.neovide then
     vim.g.neovide_input_macos_option_key_is_meta = "both"
 end
 
+------------------------------------------------------------------------------
+-- Markdown 代码块 / 内联代码背景色
+--
+-- markview.nvim 默认会把代码块/内联代码背景往“亮处”混合(Oklab L *= 1.15/1.2)，
+-- 在 palenight 这类深色主题上会泛出灰白雾霾感。这里改用比默认背景色更深的通透色
+-- (#1e2030)，让代码区像一块沉下去的深色面板，视觉上更清爽。
+--
+-- 关键点：markview.highlights.set_hl() 在目标高亮组已有值时会跳过覆盖，因此只要在
+-- markview 生成完高亮后再写入一次即可“锁定”住，且不会被它的 ColorScheme 回调改回去。
+-- 这里用 vim.schedule 把覆盖推迟到 markview 同步处理之后执行，从而保留它为内联代码
+-- 设置的 fg(取自 @markup.raw)，只替换背景。
+------------------------------------------------------------------------------
+local MD_CODE_BG = "#1e2030"
+
+local function apply_md_code_bg()
+  if vim.o.background ~= "dark" then
+    return
+  end
+
+  -- 代码块：markview 默认就只设 bg，这里同样只改 bg
+  vim.api.nvim_set_hl(0, "MarkviewCode", { bg = MD_CODE_BG })
+
+  -- 内联代码：保留 markview 计算出的 fg，仅替换 bg
+  local ic = vim.api.nvim_get_hl(0, { name = "MarkviewInlineCode", link = false, create = false }) or {}
+  local raw = vim.api.nvim_get_hl(0, { name = "@markup.raw", link = false, create = false }) or {}
+  local fg = ic.fg or raw.fg
+  local spec = { bg = MD_CODE_BG }
+  if fg then
+    spec.fg = fg
+  end
+  vim.api.nvim_set_hl(0, "MarkviewInlineCode", spec)
+
+  -- nvim-hl-mdcodeblock.lua：编辑态/未渲染时的兜底背景，保持一致
+  vim.api.nvim_set_hl(0, "MDCodeBlock", { bg = MD_CODE_BG })
+end
+
+vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
+  group = vim.api.nvim_create_augroup("MdCodeBg", { clear = true }),
+  callback = function()
+    -- 等 markview 先生成高亮，再覆盖背景
+    vim.schedule(apply_md_code_bg)
+  end,
+})
+
 if vim.g.started_by_firenvim then
   vim.api.nvim_set_keymap('i', '«', '<Plug>(copilot-suggest)', {noremap = true, silent = true})
   vim.api.nvim_set_keymap('i', '‘', '<Plug>(copilot-next)', {noremap = true, silent = true})
