@@ -1,3 +1,14 @@
+-- Recognize PEP 723 inline-script shebangs (uv run --script, uvx) as Python.
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  group = vim.api.nvim_create_augroup("ShebangFiletype", { clear = true }),
+  callback = function(args)
+    local first_line = vim.api.nvim_buf_get_lines(args.buf, 0, 1, false)[1] or ""
+    if first_line:match("^#!/usr/bin/env") and first_line:match("uv[x]?") then
+      vim.bo[args.buf].filetype = "python"
+    end
+  end,
+})
+
 -- local autocmd = vim.api.nvim_create_autocmd
 
 -- Auto resize panes when resizing nvim window
