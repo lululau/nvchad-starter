@@ -104,3 +104,5 @@ vim.cmd([[
     endif
   endfunction
 ]])
+
+require "misc.update_packages_and_restart"
