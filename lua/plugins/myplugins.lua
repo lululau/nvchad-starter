@@ -1140,6 +1140,30 @@ local plugins = {
     end,
   },
 
+  -- org-mode: https://github.com/xheisenbugx/org.nvim
+  -- 纯 Lua 实现，无 treesitter/外部依赖；要求 Neovim 0.11+
+  -- 所有命令在 <leader>o 前缀下（agenda <leader>oa, capture <leader>oc），
+  -- org 缓冲区内按 g? 查看全部按键
+  {
+    "xheisenbugx/org.nvim",
+    main = "org",
+    lazy = false, -- 启动开销很小；需常驻以提供 <leader>o 全局按键与 agenda 命令
+    init = function()
+      -- journal 目录下按日期命名、无扩展名的日记文件也识别为 org
+      -- pattern 规则优先于扩展名规则；.+ 不匹配目录本身，netrw 不受影响
+      vim.filetype.add({
+        pattern = {
+          ["/Users/liuxiang/Documents/materials/journal/.+"] = "org",
+        },
+      })
+    end,
+    opts = {
+      org_directory = "~/org",
+      agenda_files = { "~/org/**/*.org" },
+      default_notes_file = "~/org/refile.org",
+    },
+  },
+
   -- { import = "nvchad.blink.lazyspec" }
 
   {
@@ -1183,7 +1207,12 @@ local plugins = {
           cmdline = { enabled = true },
           appearance = { nerd_font_variant = "normal" },
           fuzzy = { implementation = "prefer_rust" },
-          sources = { default = { "lsp", "snippets", "buffer", "path" } },
+          sources = {
+            default = { "lsp", "snippets", "buffer", "path" },
+            -- org.nvim 补全源（仅 org 文件类型生效）
+            per_filetype = { org = { inherit_defaults = true, "org" } },
+            providers = { org = { name = "Org", module = "org.completion.blink" } },
+          },
 
           keymap = {
             preset = "default",
