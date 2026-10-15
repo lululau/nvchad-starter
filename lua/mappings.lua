@@ -45,6 +45,7 @@ map("n", "<leader>tc", function()
   end
 end, { desc = "Toggle Copilot Completion with Status" })
 map("n", "<leader>tn", "<cmd> set nu! <CR>", { desc = "Toggle line number" })
+map("n", "<leader>tl", "<cmd> set wrap! <CR>", { desc = "Toggle line wrap (truncate lines)" })
 map("n", "<leader>bn", "<cmd> enew <CR>", { desc = "New buffer" })
 map("n", "<leader>bs", "<cmd> enew <CR>", { desc = "New buffer" })
 map("n", "<leader>bm", ":messages <CR>", { desc = "Show messages" })
